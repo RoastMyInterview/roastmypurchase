@@ -13,52 +13,29 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://roastmyinterview.me'),
-  title: 'RoastMyInterview.me | Face Dick Headerson',
-  description:
-    'Face tough-love executive hiring manager Dick Headerson. Zero buzzwords, brutal reality checks, and instant termination for corporate jargon.',
-  keywords: [
-    'mock interview',
-    'AI interview roast',
-    'Dick Headerson',
-    'job interview practice',
-    'corporate buzzwords',
-    'interview prep'
-  ],
+  metadataBase: new URL('https://roastmypurchase.me'),
+  title: 'RoastMyPurchase.me | Face Dick Headerson',
+  description: 'Before dropping serious cash on a depreciating asset, gadget, or impulse buy, face Dick Headerson for a brutal financial reality check.',
+  keywords: ['purchase roast', 'impulse buy audit', 'spending roast', 'financial reality check', 'Dick Headerson'],
   openGraph: {
-    title: 'RoastMyInterview.me | Face Dick Headerson',
-    description:
-      'Think you can survive a mock interview without buzzwords? Face Dick Headerson and see if you get hired or terminated on question 1.',
-    url: 'https://roastmyinterview.me',
-    siteName: 'RoastMyInterview.me',
-    images: [
-      {
-        url: '/dick-avatar.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Dick Headerson - RoastMyInterview.me',
-      },
-    ],
+    title: 'RoastMyPurchase.me | Face Dick Headerson',
+    description: 'Are you about to waste hard-earned cash? Face Dick Headerson and see if your purchase survives the hot seat.',
+    url: 'https://roastmypurchase.me',
+    siteName: 'RoastMyPurchase.me',
+    images: [{ url: 'https://roastmyinterview.me/dick-avatar.jpg', width: 1200, height: 630, alt: 'Dick Headerson' }],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'RoastMyInterview.me | Face Dick Headerson',
-    description:
-      'Survive the hot seat with tough-love hiring manager Dick Headerson without corporate buzzwords.',
-    images: ['/dick-avatar.jpg'],
+    title: 'RoastMyPurchase.me | Face Dick Headerson',
+    description: 'Dick Headerson shreds impulsive purchases and retail therapy delusions.',
+    images: ['https://roastmyinterview.me/dick-avatar.jpg'],
   },
-  icons: {
-    icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>',
-  },
+  icons: { icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🔥</text></svg>' },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} bg-zinc-950 text-zinc-100 antialiased selection:bg-orange-500 selection:text-black`}>
