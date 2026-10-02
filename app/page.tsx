@@ -9,7 +9,7 @@ import {
   Timer, Gift, X, Info, HelpCircle, Volume2, VolumeX, Smile, Briefcase,
   Sparkles, Crown, BarChart3, Copy, Swords, MessageCircle, RefreshCw,
   Building2, Smartphone, Zap, ChevronDown, ChevronUp, FileWarning,
-  MessageSquare, Radio, Tag, DollarSign, ShoppingCart, CreditCard
+  MessageSquare, Radio, CreditCard, ShoppingCart, Wallet
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { cn } from '@/lib/utils';
@@ -17,32 +17,32 @@ import { cn } from '@/lib/utils';
 const DICK_AVATAR = 'https://roastmyinterview.me/dick-avatar.jpg';
 
 const BALLOON_ROASTS = [
-  "I roast your shopping cart in here so you don't empty your bank account out there!",
-  "Drop 'it's an investment piece' and tell me why you actually need this shiny toy.",
-  "If you're financing a lifestyle upgrade over 72 months, you're fired. Defend this purchase!",
-  "Let's turn your late-night impulse buy into cold, hard logic before you regret it.",
-  "You're better than buying expensive gym gear just to turn it into a clothes rack. Step up.",
-  "Zero hype. Maximum reality check. Let's see if this purchase survives the hot seat!",
-  "Real wealth starts when retail therapy stops. Defend the item or put it down!",
-  "I'm here to give you the honest financial critique your friends were too polite to say.",
-  "Drop the 'you only live once' excuse. Your credit card bill will live forever.",
-  "Most shoppers buy feelings, not utility. Let's see what you're actually paying for.",
-  "Three questions between you and total buyer's remorse. Let's go!",
-  "You want financial freedom? Stop falling for countdown timers and defend your cart.",
-  "Every time you say 'I work hard, I deserve this', a predatory retailer rejoices. Let's fix that.",
-  "Tough love is the ultimate shortcut to keeping your money in your pocket.",
-  "Don't swipe out of emotional boredom. Practice with me until nobody talks you into bad debt!"
+  "I roast your impulse buys in here so you don't go broke out there!",
+  "Drop the 'it's an investment piece' nonsense. Tell me why you actually need this.",
+  "If you use 'girl math' or 'boy math' to justify this, you're fired.",
+  "Let's turn your retail therapy delusion into a brutal financial reality check!",
+  "You're better than buying depreciating assets to impress people you don't even like.",
+  "Zero fluff. Maximum ROI. Let's see if this purchase survives the hot seat!",
+  "Real wealth is built when impulsive buying stops. Show me the cart!",
+  "I'm here to give you the brutal financial critique your enabler friends won't.",
+  "Drop the 'I deserve a little treat' cliché. Give me concrete utility.",
+  "Most people buy things to fill a void. Let's save your bank account instead.",
+  "Three questions between you and a maxed-out credit card. Let's go!",
+  "You want financial freedom? Stop acting offended by basic math.",
+  "Every time you write 'future-proofing', I smell tech debt. Let's fix that.",
+  "Tough love is the fastest shortcut to actual net worth.",
+  "Don't click checkout out of boredom. Practice with me until your impulses stop!"
 ];
 
 const LIVE_CASUALTIES = [
-  "⚡ Miami shopper failed for claiming a designer watch is 'an investment' (11s ago)",
-  "🔥 $3,400 luxury espresso machine buyer talked down to a simple pour-over (23s ago)",
-  "💀 Car shopper scored 7/100 for agreeing to an 84-month APR financing deal (34s ago)",
-  "🚀 Gadget collector hit 94/100 by calculating cost-per-use and walking away (41s ago)",
-  "🚨 Purchase terminated for planning to buy a treadmill without measuring doorway (52s ago)",
-  "🔥 Sneakerhead jump-started savings after Dick audited closet duplicates (1m ago)",
-  "⚡ High-ticket software buyer failed question 2 on actual monthly usage (1m ago)",
-  "🏆 Smart consumer hit 96/100 with zero retail therapy rationalizations (2m ago)"
+  "⚡ Crypto bro failed for calling a meme coin a 'long-term hold' (12s ago)",
+  "🔥 Tech setup jumped from 14/100 to 88/100 after cutting the $800 RGB keyboard (24s ago)",
+  "💀 Influencer scored 4/100 for financing a designer bag at 24% APR (30s ago)",
+  "🚀 Freelancer hit 94/100 by buying a reliable used Honda instead of a leased BMW (42s ago)",
+  "🚨 Audit terminated for claiming a $4,000 watch is an 'essential networking tool' (50s ago)",
+  "🔥 Credit score jumped after Dick talked a user out of a timeshare (1m ago)",
+  "⚡ Impulse buyer failed question 2 on basic utility vs. cost ratio (1m ago)",
+  "🏆 Wealth builder scored 96/100 with zero status-symbol spending (2m ago)"
 ];
 
 const BAD_WORDS_REGEX = /\b(fuck|shit|bitch|asshole|cunt|dickhead|pussy|whore|slut|faggot|nigg|cock|penis|vagina|bastard|twat)\b/i;
@@ -56,25 +56,25 @@ interface WallItem {
 }
 
 const INITIAL_WALL_OF_SHAME: WallItem[] = [
-  { name: 'Brad K.', role: '$4,200 Carbon Road Bike', score: 9, verdict: 'Hasn\'t ridden a bike in 12 years; claimed it will "change his entire identity".', timeAgo: '5m ago' },
-  { name: 'Sarah L.', role: '$850 Designer Trench Coat', score: 12, verdict: 'Bio said "staple wardrobe investment". Lives in sunny Southern California.', timeAgo: '16m ago' },
-  { name: 'Marcus D.', role: '85" 8K QLED TV', score: 18, verdict: 'Currently behind on rent; claimed it was "critical for productivity".', timeAgo: '31m ago' },
-  { name: 'Tanya R.', role: '$2,800 Smart Home Gym', score: 14, verdict: 'Already has 2 gym memberships and used previous treadmill as a laundry rack.', timeAgo: '47m ago' },
-  { name: 'Alex M.', role: 'Luxury Sports Coupe', score: 6, verdict: 'Wanted to finance at 14.8% APR over 84 months because "rates might drop".', timeAgo: '1h ago' },
+  { name: 'Dave R.', role: 'Financed Jet Ski ($14k)', score: 11, verdict: 'Claimed it would "pay for itself in memories". Fired in 30 seconds.', timeAgo: '4m ago' },
+  { name: 'Elena K.', role: 'Designer Dog Sweater ($450)', score: 8, verdict: 'Used "girl math" to say it was practically free. Zero utility.', timeAgo: '15m ago' },
+  { name: 'Marcus P.', role: 'Latest iPhone Upgrade ($1.2k)', score: 18, verdict: 'Upgrading from last year\'s model for a 5% better camera. Pathetic.', timeAgo: '29m ago' },
+  { name: 'Sarah T.', role: 'Timeshare Presentation', score: 6, verdict: 'Fell for the free breakfast trap and signed a 10-year contract.', timeAgo: '45m ago' },
+  { name: 'Jason B.', role: 'Crypto Alt-Coin ($5k)', score: 6, verdict: 'Called a dog-themed digital token a "generational wealth play".', timeAgo: '1h ago' },
 ];
 
 const INITIAL_HALL_OF_FAME: WallItem[] = [
-  { name: 'Jordan T.', role: 'Commercial Grade Blender', score: 95, verdict: 'Replaced a daily $11 smoothie habit; proven payback period under 60 days.', timeAgo: '2h ago' },
-  { name: 'Elena V.', role: 'Ergonomic Task Chair', score: 92, verdict: 'Wrote zero fluff, calculated 8 hours daily posture ROI, zero debt taken.', timeAgo: '4h ago' },
-  { name: 'Greg H.', role: 'Refurbished Work Laptop', score: 89, verdict: 'Resisted $3k flagship temptation and bought exactly what workload required.', timeAgo: '7h ago' },
+  { name: 'Chloe M.', role: 'Refurbished Laptop ($800)', score: 95, verdict: 'Saved $800 over new, exact same specs, pure utility. Bought in cash.', timeAgo: '2h ago' },
+  { name: 'Ryan D.', role: 'Quality Winter Boots ($300)', score: 92, verdict: 'High upfront cost, but lasts 10 years. "Vimes Boots Theory" applied flawlessly.', timeAgo: '5h ago' },
+  { name: 'Tomas S.', role: 'Used Toyota Tacoma ($18k)', score: 89, verdict: 'Skipped the new truck depreciation hit. Reliable, holds value, smart buy.', timeAgo: '8h ago' },
 ];
 
-const SPENDING_WARS = [
-  { name: 'Luxury & Designer Goods', avgScore: 11, players: '4,450 victims', verdict: '"It\'s an investment piece" and maxed-out store credit cards.' },
-  { name: 'Unused Fitness Gadgets', avgScore: 14, players: '3,780 victims', verdict: 'Buying expensive machines to compensate for missing discipline.' },
-  { name: 'New Car Financing', avgScore: 18, players: '2,920 victims', verdict: '84-month loans for cars that depreciate 20% off the lot.' },
-  { name: 'Tech & Kitchen Toys', avgScore: 16, players: '2,110 victims', verdict: 'High-tech gadgets destined for the back of the pantry.' },
-  { name: 'Hype Streetwear & Shoes', avgScore: 13, players: '1,840 victims', verdict: 'Synthetic scarcity convincing young buyers to burn emergency funds.' }
+const MARKET_WARS = [
+  { name: 'Tech "Future-Proofing"', avgScore: 12, players: '4,620 victims', verdict: 'Buying massive specs you\'ll never actually use.' },
+  { name: 'Designer Fashion', avgScore: 15, players: '3,890 victims', verdict: 'Financing a luxury logo to impress strangers.' },
+  { name: 'New Car Depreciation', avgScore: 9, players: '2,840 victims', verdict: 'Eating a 20% loss the second you drive off the lot.' },
+  { name: 'Hobby Gear Hoarding', avgScore: 14, players: '1,930 victims', verdict: 'Buying pro-level gear for a hobby you started yesterday.' },
+  { name: 'Subscription Creep', avgScore: 19, players: '1,160 victims', verdict: 'Paying $15/month forever because you forgot to cancel.' }
 ];
 
 const MAX_FREE_ATTEMPTS = 1;
@@ -175,11 +175,11 @@ export default function Home() {
 
       const defaultTitle = 'RoastMyPurchase.me | Face Dick Headerson';
       const alertTitles = [
-        "🔥 Don't swipe that card yet! ",
-        "👀 Your bank account is screaming... ",
-        "💀 Retail therapy trap detected... ",
+        "🔥 Don't checkout yet! ",
+        "👀 Your wallet is crying... ",
+        "💀 Step away from the cart... ",
         "💳 The hot seat is still warm... ",
-        "🚨 Delusional purchase rationalization... ",
+        "🚨 Impulse buy detected... ",
         "⏳ Your financial audit is waiting... "
       ];
       
@@ -211,7 +211,7 @@ export default function Home() {
       }
 
       if (challengerName) {
-        const roleVal = challengerRole || 'Luxury Watch';
+        const roleVal = challengerRole || 'Impulse Buy';
         const scoreVal = challengerScore ? (challengerScore.includes('/') ? challengerScore : `${challengerScore}/100`) : '14/100';
         const numScore = parseInt(scoreVal.replace(/[^0-9]/g, ''), 10) || 14;
         setChallengerInfo({
@@ -231,7 +231,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem('rmp_pur_free_attempt_v2');
+    const saved = localStorage.getItem('rmpur_free_attempt_v2');
     if (saved) setFreeAttempts(parseInt(saved, 10) || 0);
   }, []);
 
@@ -269,7 +269,7 @@ export default function Home() {
     return text
       .replace(/[\*\#\_\~]/g, '')
       .replace(/https?:\/\/\S+/g, '')
-      .replace(/🚨|💀|🗣|🚩|💡|🎖|👑|📊|⚔|🏢|⚡|📱|🏷️|💵|💳|🛍/g, '')
+      .replace(/🚨|💀|🗣|🚩|💡|🎖️|👑|📊|⚔|🏢|⚡|📱|🏷️|💵|💳|🛒/g, '')
       .trim();
   };
 
@@ -321,7 +321,7 @@ export default function Home() {
     if (window.speechSynthesis) window.speechSynthesis.cancel();
     if (!introPlayed) {
       setIntroPlayed(true);
-      speakText("Listen up. Retail marketers spend billions designing psychological traps so you'll blow your savings on stuff you don't need. Polite friends nod along and say 'treat yourself.' I give you the cold, unapologetic financial audit you need before you swipe your card. Defend the item, explain your logic, and let's see if this purchase actually makes sense.");
+      speakText("Listen up. Your friends will tell you to treat yourself, and the marketers will tell you it's an investment. But I'm going to tell you the brutal truth about your spending habits. Drop the consumer delusions, step into the hot seat, and let's see if this purchase is actually worth your hard-earned cash.");
     } else {
       let nextIdx = 0;
       do {
@@ -388,13 +388,13 @@ export default function Home() {
     if (!hasScorecard) return null;
 
     const scoreMatch = fullText.match(/Final Score:?\*?\*?\s*([^\n\r]+)/i);
-    const decisionMatch = fullText.match(/(?:Hiring Decision|Verdict|Purchase Verdict|Decision):?\*?\*?\s*([^\n\r]+)/i);
-    const decisionText = decisionMatch ? decisionMatch[1].replace(/[\[\]]/g, '').trim() : 'PURCHASE DENIED';
+    const decisionMatch = fullText.match(/(?:Hiring Decision|Verdict|Purchase Verdict|Financial Verdict):?\*?\*?\s*([^\n\r]+)/i);
+    const decisionText = decisionMatch ? decisionMatch[1].replace(/[\[\]]/g, '').trim() : 'FINANCIAL DELUSION';
 
     const autopsyMatch = fullText.match(/The Autopsy\*?\*?\s*([\s\S]*?)(?=###|🗣|What You Said|🚩|Red Flags|$)/i);
-    const translationMatch = fullText.match(/(?:What You Said vs\.? What Dick Heard|What Dick actually heard|What Your Brain Said vs Reality)\*?\*?\s*([\s\S]*?)(?=###|🚩|Red Flags|💡|The Budget Doctor|$)/i);
-    const redFlagsMatch = fullText.match(/Red Flags Identified\*?\*?\s*([\s\S]*?)(?=###|💡|The Budget Doctor|---|Official Evaluation|$)/i);
-    const scriptDoctorMatch = fullText.match(/The (?:Script|Budget) Doctor[^\n]*\*?\*?\s*([\s\S]*?)(?=---|Official Evaluation|$)/i);
+    const translationMatch = fullText.match(/(?:What You Said vs\.? What Dick Heard|What Dick actually heard|What Your Wallet Heard)\*?\*?\s*([\s\S]*?)(?=###|🚩|Red Flags|💡|The Script Doctor|The Wealth Doctor|$)/i);
+    const redFlagsMatch = fullText.match(/Red Flags Identified\*?\*?\s*([\s\S]*?)(?=###|💡|The Script Doctor|The Wealth Doctor|---|Official Evaluation|$)/i);
+    const scriptDoctorMatch = fullText.match(/(?:The Script Doctor|The Wealth Doctor)[^\n]*\*?\*?\s*([\s\S]*?)(?=---|Official Evaluation|$)/i);
 
     const splitIdx = fullText.search(/(?:---|##\s*🔥?.*Scorecard)/i);
     const introRoast = splitIdx > 20 ? fullText.slice(0, splitIdx).trim() : '';
@@ -434,11 +434,11 @@ export default function Home() {
     if (isInterviewOver && userName && jobTitle) {
       const newScore = autoFailed ? 0 : Math.floor(Math.random() * 25) + 5;
       const newVerdict = autoFailed
-        ? 'Instant purchase rejection for deploying consumerist clichés.'
-        : 'Dick gave them an honest reality check before they swiped the card.';
+        ? 'Instant audit cancellation for deploying toxic spending clichés.'
+        : 'Dick gave them a brutal financial reality check.';
 
       setWallFeed((prev) => [
-        { name: userName, role: jobTitle + (companyName ? ` (${companyName})` : ''), score: newScore, verdict: newVerdict, timeAgo: 'Just now' },
+        { name: userName, role: `${jobTitle}${companyName ? ` (${companyName})` : ''}`, score: newScore, verdict: newVerdict, timeAgo: 'Just now' },
         ...prev.slice(0, 5),
       ]);
     }
@@ -462,12 +462,12 @@ export default function Home() {
     const vipActive = forceVip || isVipMode;
 
     if (!jobTitle.trim() || !userName.trim()) {
-      alert('Please enter your name and what purchase you are considering first!');
+      alert('Please enter your name and the item you want to buy first!');
       return;
     }
 
     if (BAD_WORDS_REGEX.test(userName.toLowerCase())) {
-      alert("Let's keep it clean. Please use an appropriate name or shopper handle.");
+      alert("Let's keep it clean. Please use an appropriate name.");
       return;
     }
 
@@ -479,33 +479,33 @@ export default function Home() {
     if (!vipActive) {
       const nextCount = freeAttempts + 1;
       setFreeAttempts(nextCount);
-      localStorage.setItem('rmp_pur_free_attempt_v2', nextCount.toString());
+      localStorage.setItem('rmpur_free_attempt_v2', nextCount.toString());
     }
 
     setStarted(true);
     const randomRejections = Math.floor(Math.random() * (1000000 - 10 + 1) + 10).toLocaleString();
 
     const challengerContext = challengerInfo
-      ? ` My rival ${challengerInfo.name} challenged me after scoring ${challengerInfo.score} for considering buying ${challengerInfo.role}. Call out that I am here to beat ${challengerInfo.name}'s financial discipline score.`
+      ? ` My rival ${challengerInfo.name} challenged me after scoring ${challengerInfo.score} for their purchase of ${challengerInfo.role}. Call out that I am here to beat ${challengerInfo.name}'s score.`
       : '';
 
     const bioContext = linkedinBio.trim()
-      ? ` The price and my justification is: "${linkedinBio.trim()}". In your very first sentence, savage and roast this pricing rationalization before asking Question 1.`
+      ? ` My stated reason for buying this is: "${linkedinBio.trim()}". In your very first sentence, savage and roast this justification before asking Question 1.`
       : '';
 
     const companyContext = companyName.trim()
-      ? ` Store / Merchant / Brand: "${companyName.trim()}". Hold me accountable to who is selling this to me.`
+      ? ` The cost / price of this item is: "${companyName.trim()}". Hold me accountable to that financial hit.`
       : '';
 
     if (vipActive) {
       append({
         role: 'user',
-        content: `My name is ${userName.trim()} and I am considering buying: ${jobTitle.trim()}.${companyContext}${bioContext}${challengerContext} You are Dick Headerson, a tough-love financial reality checker and anti-consumerism auditor. You shred impulse spending, emotional justifications ('treat yourself', 'investment piece'), lifestyle inflation, and predatory financing. You ask exactly 13 brutal questions total (The Unlucky 13 Gauntlet), one at a time.\n\nDELIVERABLE MILESTONES:\n- At Question 4 (after answer 4): In your response, provide '### 📊 Milestone Report #1 (Impulse & Emotional Justification Audit)', then immediately ask Question 5.\n- At Question 8 (after answer 8): In your response, provide '### 📊 Milestone Report #2 (Opportunity Cost & Depreciation Reality)', then immediately ask Question 9.\n- After answer 13: Do NOT ask another question; provide Dick Headerson's Official Scorecard.\n\nIntroduce yourself now, address me by name, state you've talked consumers out of ${randomRejections} reckless purchases, dare me to survive the Unlucky 13 questions with checkpoints at Q4 and Q8, and ask Question 1.`,
+        content: `My name is ${userName.trim()} and I am thinking about buying: ${jobTitle.trim()}.${companyContext}${bioContext}${challengerContext} You are Dick Headerson, a tough-love financial auditor, wealth protector, and anti-consumerism critic. You shred impulsive spending, retail therapy, depreciating assets, and financial delusions. You ask exactly 13 brutal questions total (The Unlucky 13 Gauntlet), one at a time.\n\nDELIVERABLE MILESTONES:\n- At Question 4 (after answer 4): In your response, provide '### 📊 Milestone Report #1 (Utility vs. Cost Audit)', then immediately ask Question 5.\n- At Question 8 (after answer 8): In your response, provide '### 📊 Milestone Report #2 (Impulse & Status Symbol Audit)', then immediately ask Question 9.\n- After answer 13: Do NOT ask another question; provide Dick Headerson's Official Scorecard with actionable constructive advice on how to build actual wealth instead of wasting it.\n\nNever give actual legal or certified financial advice, just harsh common sense. Introduce yourself now, address me by name, state you've talked people out of ${randomRejections} terrible impulse buys, dare me to survive the Unlucky 13 questions with checkpoints at Q4 and Q8, and ask Question 1.`,
       });
     } else {
       append({
         role: 'user',
-        content: `My name is ${userName.trim()} and I am considering buying: ${jobTitle.trim()}.${companyContext}${bioContext}${challengerContext} You are Dick Headerson, a tough-love financial reality checker and anti-consumerism auditor. You hate emotional spending, consumer clichés, and lifestyle creep. You ask exactly 3 brutal questions total, one at a time. After my answer to question 3, do not ask another question; provide Dick Headerson's Official Scorecard with actionable constructive advice on whether to buy, downgrade, or walk away. Introduce yourself now, address me by name, set a high-energy tough-love tone, and ask Question 1.`,
+        content: `My name is ${userName.trim()} and I am thinking about buying: ${jobTitle.trim()}.${companyContext}${bioContext}${challengerContext} You are Dick Headerson, a tough-love financial auditor, wealth protector, and anti-consumerism critic. You hate impulsive spending, retail therapy, depreciating assets, and financial delusions. You ask exactly 3 brutal questions total, one at a time. After my answer to question 3, do not ask another question; provide Dick Headerson's Official Scorecard with actionable constructive advice on how to build actual wealth instead of wasting it on this. Never give actual legal or certified financial advice, just harsh common sense. Introduce yourself now, address me by name, set a high-energy tough-love tone, and ask Question 1.`,
       });
     }
   };
@@ -551,9 +551,9 @@ export default function Home() {
     textarea.style.height = 'auto';
 
     const triggerWords = [
-      'it\'s an investment', 'treat yourself', 'you only live once', 'yolo',
-      'retail therapy', 'lifestyle upgrade', 'future heirloom', 'passive income',
-      'can\'t afford not to', 'saving money by buying', 'buying it for future me', 'deserve this'
+      'treat myself', 'retail therapy', 'yolo', 'you only live once',
+      'investment piece', 'girl math', 'boy math', 'deserve it',
+      'pay for itself', 'future proof', 'future-proof', 'status symbol'
     ];
     const lowerValue = value.toLowerCase();
     const hitBuzzword = triggerWords.find((word) => lowerValue.includes(word));
@@ -568,7 +568,7 @@ export default function Home() {
       setTimeout(() => {
         append({
           role: 'assistant',
-          content: `🚨 **SHOPPER DELUSION TRIGGERED: PURCHASE TERMINATED** 🚨\n\nDid you just say *"${hitBuzzword}"* to justify spending your hard-earned money? \n\nI stop financial audits dead in their tracks because that is the exact line predatory marketing departments feed consumers to empty their wallets. You work too hard for your money, ${userName}—stop gaslighting yourself with marketing clichés.\n\n### Dick Headerson's Official Scorecard\n* **Final Score:** 0/100\n* **Purchase Verdict:** PURCHASE DENIED\n* **Fatal Error:** Deployed the classic rationalization cliché "${hitBuzzword}".\n* **The Autopsy:** Shopper surrendered cold financial logic in favor of emotional marketing slogans.\n* **The Fix:** Close the browser tab. Put the credit card back in your wallet. Wait 48 hours and see if you even remember this item!`,
+          content: `🚨 **SPENDING CLICHÉ TRIGGERED: EMERGENCY AUDIT CANCELLATION** 🚨\n\nDid you just justify this purchase with *"${hitBuzzword}"*? \n\nI stop audits dead in their tracks because that is the exact phrase marketers use to separate fools from their money. You're trying to build a stable life, ${userName}—stop acting like a mindless consumer.\n\n### Dick Headerson's Official Scorecard\n* **Final Score:** 0/100\n* **Purchase Verdict:** FINANCIAL DELUSION\n* **Fatal Error:** Deployed the toxic spending cliché "${hitBuzzword}".\n* **The Autopsy:** User resorted to emotional consumer logic instead of proving tangible utility and ROI.\n* **The Fix:** Close the checkout tab immediately. Wait 48 hours, calculate how many hours you have to work to pay for this, and try again with real logic!`,
         });
       }, 500);
       return;
@@ -636,9 +636,9 @@ export default function Home() {
   const handleNativeShare = async () => {
     const shareTextContent = parsedScorecard?.finalScore
       ? headToHeadResult
-        ? `I took ${headToHeadResult.challengerName}'s purchase audit challenge on RoastMyPurchase.me! They scored ${headToHeadResult.rivalScore}, I scored ${headToHeadResult.userScore}. Think your spending discipline can beat us?`
-        : `I just faced Dick Headerson for my potential ${jobTitle || 'purchase'} and scored ${parsedScorecard.finalScore}. Think your wallet can survive?`
-      : `Before you waste money on that impulse buy, face Dick Headerson for a reality check:`;
+        ? `I took ${headToHeadResult.challengerName}'s purchase audit challenge on RoastMyPurchase.me! They scored ${headToHeadResult.rivalScore}, I scored ${headToHeadResult.userScore}. Think you make smarter money moves?`
+        : `I just faced Dick Headerson before making a purchase of ${jobTitle || 'an item'} and scored ${parsedScorecard.finalScore}. Can you justify your spending?`
+      : `Think your recent impulse buy can survive Dick Headerson without getting roasted? Step into the hot seat:`;
 
     const shareData = {
       title: 'RoastMyPurchase.me | Face Dick Headerson',
@@ -658,34 +658,34 @@ export default function Home() {
     if (!headToHeadResult) return;
     const { challengerName, userScore, rivalScore, won, tied } = headToHeadResult;
     let message = won
-      ? `Hey ${challengerName}! I accepted your challenge on RoastMyPurchase.me. You scored ${rivalScore}/100, but I crushed you with ${userScore}/100! 🏆 Try to beat my financial discipline: ${shareUrl}`
+      ? `Hey ${challengerName}! I accepted your challenge on RoastMyPurchase.me. You scored ${rivalScore}/100, but I crushed you with ${userScore}/100! 🏆 Learn how to budget: ${shareUrl}`
       : tied
         ? `Hey ${challengerName}! We tied with ${userScore}/100 on RoastMyPurchase.me. Rematch now: ${shareUrl}`
-        : `Hey ${challengerName}! You beat me with ${rivalScore}/100 to my ${userScore}/100 on RoastMyPurchase.me. Coming back with real financial logic: ${shareUrl}`;
+        : `Hey ${challengerName}! You beat me with ${rivalScore}/100 to my ${userScore}/100 on RoastMyPurchase.me. Coming back for revenge: ${shareUrl}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const shareText = autoFailed
-    ? `I instantly failed an AI purchase audit because I slipped and used the cliché 'it's an investment'. See how fast you get caught:`
+    ? `I instantly failed an AI financial audit because I slipped and used "girl math" / "treat myself". See how fast you get caught:`
     : headToHeadResult
-      ? `I faced Dick Headerson after ${headToHeadResult.challengerName} challenged my purchase. I scored ${headToHeadResult.userScore}/100 vs ${headToHeadResult.rivalScore}/100. Can you beat me?`
-      : `I just faced tough-love spending auditor Dick Headerson for my ${jobTitle || 'purchase'}. Can your cart survive?`;
+      ? `I faced Dick Headerson after ${headToHeadResult.challengerName} challenged my spending. I scored ${headToHeadResult.userScore}/100 vs ${headToHeadResult.rivalScore}/100. Can you beat me?`
+      : `I just faced tough-love financial auditor Dick Headerson for my ${jobTitle || 'purchase'}. Can your cart beat my score?`;
 
   const handleWallShare = (platform: string) => {
     const scoreText = autoFailed ? '0/100 (Instant Cliché Failure)' : (parsedScorecard?.finalScore || '14/100');
-    const decisionText = autoFailed ? 'PURCHASE DENIED' : (parsedScorecard?.decision || 'NEEDS RADICAL RETHINK');
+    const decisionText = autoFailed ? 'FINANCIAL DELUSION' : (parsedScorecard?.decision || 'NEEDS RADICAL RE-EVALUATION');
     const candidateRole = jobTitle.trim() || 'Item';
-    const companyTag = companyName.trim() ? ` from ${companyName.trim()}` : '';
+    const companyTag = companyName.trim() ? ` for ${companyName.trim()}` : '';
 
     if (platform === 'slack') {
-      const slackSnippet = `:rotating_light: *${userName || 'A friend'} just faced the spending reality check on RoastMyPurchase!*\n• *Item Considered:* ${candidateRole}${companyTag}\n• *Score:* ${scoreText}\n• *Verdict:* ${decisionText}\n• *Offense:* Banned from using "treat yourself" to justify bad debt.\n\nThink your purchase actually makes financial sense? Step up to the hot seat: ${shareUrl}`;
+      const slackSnippet = `:rotating_light: *${userName || 'A friend'} just survived the hot seat with Dick Headerson on RoastMyPurchase!*\n• *Purchase:* ${candidateRole}\n• *Score:* ${scoreText}\n• *Verdict:* ${decisionText}\n• *Offense:* Banned from using "treat myself" as a financial strategy.\n\nThink you can justify your Amazon cart? Step up to the hot seat: ${shareUrl}`;
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
         navigator.clipboard.writeText(slackSnippet);
         alert('📋 Pre-formatted message copied to clipboard!\n\nPaste into Slack or your group chat.');
       }
     }
     else if (platform === 'facebook') {
-      const fbPostText = `Dick Headerson just roasted my potential purchase of ${candidateRole} with a ${scoreText}.\n\nTagging every friend who loves retail therapy: step up to the hot seat and see if your shopping cart survives: ${shareUrl}`;
+      const fbPostText = `Dick Headerson just roasted my ${candidateRole} purchase with a ${scoreText}.\n\nTagging every friend who uses "girl math" or impulse buys at 2 AM: step up to the hot seat and see if you can beat my score: ${shareUrl}`;
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
         navigator.clipboard.writeText(fbPostText);
         alert('🔥 Call-Out caption copied to clipboard!\n\nOpening Facebook now!');
@@ -696,7 +696,7 @@ export default function Home() {
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
     }
     else if (platform === 'linkedin') {
-      const linkedInPostText = `Humbled to announce that I just survived the financial sanity check with Dick Headerson for my potential purchase of ${candidateRole}${companyTag} on RoastMyPurchase.me.\n\n📊 Final Score: ${scoreText}\n🚨 Verdict: ${decisionText}\n\nDick's tough-love rule: zero marketing buzzwords, zero emotional rationalizations, strictly cold utility ROI. Slip and say 'it\'s an investment', and your purchase gets denied on the spot.\n\nCan your cart survive the audit? Step up:\n${shareUrl}`;
+      const linkedInPostText = `Humbled to announce that I just survived the financial audit hot seat with Dick Headerson for my ${candidateRole}${companyTag} on RoastMyPurchase.me.\n\n📊 Final Score: ${scoreText}\n🚨 Verdict: ${decisionText}\n\nDick's tough-love rule: zero retail therapy clichés, zero depreciating status symbols. Slip and say 'investment piece' about a jacket, and you get terminated on the spot.\n\nThink your spending habits can survive? Step up:\n${shareUrl}`;
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
         navigator.clipboard.writeText(linkedInPostText);
         alert('🔥 Post copied to clipboard!\n\nOpening LinkedIn composer—simply hit Paste.');
@@ -708,7 +708,7 @@ export default function Home() {
       else window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`, '_blank');
     }
     else if (platform === 'instagram') {
-      const igCaption = `Dick Headerson just roasted my potential purchase of ${candidateRole} with a ${scoreText}. Verdict: ${decisionText}.\n\nThink your cart can survive without getting roasted? Link in bio or visit roastmypurchase.me\n\n#RoastMyPurchase #DickHeaderson #FinancialSanity #ImpulseBuy #RetailTherapy`;
+      const igCaption = `Dick Headerson just roasted my ${candidateRole} purchase with a ${scoreText}. Verdict: ${decisionText}.\n\nThink your spending habits will survive? Link in bio or visit roastmypurchase.me\n\n#RoastMyPurchase #DickHeaderson #PersonalFinance #ImpulseBuy #GirlMath`;
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
         navigator.clipboard.writeText(igCaption);
         alert('📸 Instagram Caption Copied!');
@@ -765,7 +765,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-white mb-2">Code Accepted!</h3>
               <p className="text-xs sm:text-sm text-zinc-300 mb-6 leading-relaxed">
-                VIP 13-Question Spending Gauntlet unlocked. Enter your purchase details below to begin.
+                VIP 13-Question Audit Gauntlet unlocked. Enter your purchase info below to begin.
               </p>
               <button
                 onClick={() => {
@@ -793,10 +793,10 @@ export default function Home() {
               </button>
               <div className="flex items-center gap-2 mb-3">
                 <Crown className="h-6 w-6 text-amber-400"/>
-                <h3 className="text-lg sm:text-xl font-black text-white">Free Spending Audit Completed!</h3>
+                <h3 className="text-lg sm:text-xl font-black text-white">Free Audit Completed!</h3>
               </div>
               <p className="text-xs sm:text-sm text-zinc-300 mb-5 leading-relaxed">
-                You&apos;ve completed your free purchase roast. Upgrade to the <strong>Unlucky 13 Gauntlet</strong> with <strong>2 milestone reports</strong> (Q4 &amp; Q8) for $10 USD. Includes 8 individual free VIP invite passes!
+                You&apos;ve completed your free financial roast. Upgrade to the <strong>Unlucky 13 Gauntlet</strong> with <strong>2 milestone reports</strong> (Q4 &amp; Q8) for $10 USD. Includes 8 individual free VIP invite passes!
               </p>
               <div className="space-y-2.5">
                 <a
@@ -817,7 +817,7 @@ export default function Home() {
                 <div className="pt-2 text-center border-t border-zinc-800 mt-3">
                   <button
                     onClick={() => {
-                      localStorage.removeItem('rmp_pur_free_attempt_v2');
+                      localStorage.removeItem('rmpur_free_attempt_v2');
                       setFreeAttempts(0);
                       setShowLimitModal(false);
                       alert('Free attempt reset! You can now start the audit.');
@@ -844,12 +844,12 @@ export default function Home() {
                 Why Use RoastMyPurchase.me?
               </h3>
               <div className="space-y-4 text-xs sm:text-sm text-zinc-300">
-                <p><strong className="text-white">1. Marketers manipulate your emotions.</strong><br/>They push scarcity countdowns and "lifestyle upgrades." Dick snaps you back to reality.</p>
-                <p><strong className="text-white">2. Kill consumerist rationalizations.</strong><br/>"It's an investment" and "I deserve this" trigger instant rejection.</p>
-                <p><strong className="text-white">3. Protect your real wealth.</strong><br/>Discover whether this item will actually generate value or just gather dust.</p>
+                <p><strong className="text-white">1. Enabler friends lie.</strong><br/>They say "treat yourself" and "you deserve it" while you silently accumulate debt.</p>
+                <p><strong className="text-white">2. Kill consumer clichés.</strong><br/>"Girl math", "boy math", and calling things an "investment piece" trigger immediate reality checks.</p>
+                <p><strong className="text-white">3. Build real wealth.</strong><br/>We force you to defend the utility of your purchase so you can stop wasting money on status symbols.</p>
               </div>
               <button onClick={() => setShowWhyModal(false)} className="mt-6 w-full rounded-xl bg-zinc-100 py-3 text-xs sm:text-sm font-bold text-black hover:bg-white transition-all shadow-lg">
-                I&apos;m ready for financial clarity
+                I&apos;m ready for the truth
               </button>
             </div>
           </div>
@@ -942,15 +942,15 @@ export default function Home() {
                 <div className="w-full rounded-2xl border-2 border-amber-500/90 bg-gradient-to-r from-amber-950/80 via-zinc-900/95 to-orange-950/80 p-3.5 text-center shadow-2xl shadow-orange-500/25 animate-in slide-in-from-top-4 mb-4">
                   <div className="flex items-center justify-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-400 mb-1">
                     <Swords className="h-4 w-4 text-amber-400 animate-pulse"/>
-                    <span>{challengerInfo.name.toUpperCase()} HAS CHALLENGED YOUR CART!</span>
+                    <span>{challengerInfo.name.toUpperCase()} HAS CHALLENGED YOU!</span>
                   </div>
                   <p className="text-sm sm:text-base font-extrabold text-white">
                     <strong className="text-orange-400">{challengerInfo.name}</strong> scored{' '}
-                    <strong className="text-amber-300 font-black text-lg">{challengerInfo.score}</strong> for considering{' '}
+                    <strong className="text-amber-300 font-black text-lg">{challengerInfo.score}</strong> for their purchase of{' '}
                     <strong className="text-sky-300">{challengerInfo.role}</strong>.
                   </p>
                   <p className="text-xs text-zinc-300 mt-1">
-                    Enter your name below. Can you beat {challengerInfo.name}&apos;s score without using retail rationalizations?
+                    Enter your details below. Can you beat {challengerInfo.name}&apos;s score without using retail therapy clichés?
                   </p>
                 </div>
               )}
@@ -984,7 +984,7 @@ export default function Home() {
                     {!introPlayed ? (
                       "Welcome to the Hot Seat. Click below if you want to know what you're really getting into."
                     ) : challengerInfo ? (
-                      `"${challengerInfo.name} scored ${challengerInfo.score} for considering ${challengerInfo.role} and challenged you to beat them. Let's see if your cart is rational!"`
+                      `"${challengerInfo.name} scored ${challengerInfo.score} for their purchase of ${challengerInfo.role} and challenged you to beat them. Let's see if you can justify your spending!"`
                     ) : (
                       `"${BALLOON_ROASTS[balloonIndex]}"`
                     )}
@@ -1018,7 +1018,7 @@ export default function Home() {
                     Dick Headerson
                   </span>
                   <span className="text-zinc-600 px-1">•</span>
-                  <span className="text-zinc-300 font-medium">Tough love. Anti-impulse reality checks. Real savings.</span>
+                  <span className="text-zinc-300 font-medium">Tough love. Zero fluff. Real net worth.</span>
                 </p>
 
                 <div className="w-full rounded-3xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 backdrop-blur text-left shadow-xl">
@@ -1037,12 +1037,12 @@ export default function Home() {
                           <h4 className="text-xs sm:text-sm font-black uppercase tracking-wide text-orange-400">1. For Play (Pure Fun)</h4>
                         </div>
                         <ul className="text-xs text-zinc-300 space-y-1.5 leading-relaxed">
-                          <li>• <strong>Roast a buddy&apos;s impulse cart:</strong> Drop in that friend about to buy a $3,000 espresso machine or third gym watch and watch them get humbled.</li>
-                          <li>• <strong>Group chat receipts:</strong> Screenshot savage purchase citations and ego-checking grades (D-) to share with friends.</li>
+                          <li>• <strong>Roast a buddy&apos;s cart:</strong> Drop in that friend who justifies buying a $900 espresso machine to "save money on coffee."</li>
+                          <li>• <strong>Group chat receipts:</strong> Screenshot savage pink slips and ego-checking grades (D-) to share with friends.</li>
                         </ul>
                       </div>
                       <div className="mt-3 pt-2 border-t border-orange-500/10 text-[10px] font-bold text-orange-300 uppercase tracking-wider">
-                        &rarr; Hilarious shopping cart comedy
+                        &rarr; Hilarious financial comedy
                       </div>
                     </div>
 
@@ -1050,15 +1050,15 @@ export default function Home() {
                       <div>
                         <div className="flex items-center gap-1.5 mb-1.5">
                           <span className="text-base">💳</span>
-                          <h4 className="text-xs sm:text-sm font-black uppercase tracking-wide text-emerald-400">2. For Real (Spending Medicine)</h4>
+                          <h4 className="text-xs sm:text-sm font-black uppercase tracking-wide text-emerald-400">2. For Real (Financial Medicine)</h4>
                         </div>
                         <ul className="text-xs text-zinc-300 space-y-1.5 leading-relaxed">
-                          <li>• <strong>The brutal financial truth:</strong> Marketers want you broke. Dick breaks down real utility, depreciation, and actual cost-per-use.</li>
-                          <li>• <strong>Kill buyer&apos;s remorse:</strong> Eradicate emotional rationalizations (&quot;it&apos;s an investment&quot;) and keep thousands in your pocket.</li>
+                          <li>• <strong>The brutal truth:</strong> Enabler friends tell you to "treat yourself." Dick tells you exactly why you're broke.</li>
+                          <li>• <strong>Kill wealth destroyers:</strong> Eradicate "girl math", status symbols, and buying things to impress people you don't even like.</li>
                         </ul>
                       </div>
                       <div className="mt-3 pt-2 border-t border-emerald-500/10 text-[10px] font-bold text-emerald-300 uppercase tracking-wider">
-                        &rarr; The fastest cure for buyer's remorse
+                        &rarr; The fastest cure for retail therapy
                       </div>
                     </div>
                   </div>
@@ -1069,7 +1069,7 @@ export default function Home() {
                     <div className="flex items-center gap-1.5 sm:gap-2">
                       <Flame className="h-5 w-5 text-orange-500 animate-pulse"/>
                       <span className="text-xs sm:text-base font-black tracking-wider uppercase text-white">
-                        {challengerInfo ? `Beat ${challengerInfo.name}` : 'Put Your Cart in the Hot Seat'}
+                        {challengerInfo ? `Beat ${challengerInfo.name}` : 'Step Up to the Hot Seat'}
                       </span>
                     </div>
                     <span className="text-[10px] sm:text-xs font-bold text-orange-400/90 uppercase tracking-wider bg-orange-500/10 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-orange-500/20">
@@ -1080,14 +1080,14 @@ export default function Home() {
                   <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                     <div>
                       <label className="mb-1.5 block text-xs font-black uppercase tracking-wider text-orange-400 flex items-center gap-1.5">
-                        <UserX className="h-4 w-4"/> 1. Your Name / Shopper Handle
+                        <UserX className="h-4 w-4"/> 1. Your Name / Handle
                       </label>
                       <input
                         ref={nameInputRef}
                         type="text"
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
-                        placeholder="e.g. Jordan M. or @gadget_guy"
+                        placeholder="e.g. Sam R. or @sammy"
                         className="w-full rounded-xl border-2 border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm sm:text-base font-bold text-white placeholder-zinc-500 outline-none transition-all focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20"
                         autoFocus
                       />
@@ -1095,14 +1095,14 @@ export default function Home() {
 
                     <div>
                       <label className="mb-1.5 block text-xs font-black uppercase tracking-wider text-orange-400 flex items-center gap-1.5">
-                        <ShoppingCart className="h-4 w-4"/> 2. Item You Are Thinking of Buying
+                        <ShoppingCart className="h-4 w-4"/> 2. Item You Want To Buy
                       </label>
                       <input
                         type="text"
                         value={jobTitle}
                         onChange={(e) => setJobTitle(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleStart()}
-                        placeholder="e.g. $3,000 Camera, Peloton, Designer Handbag"
+                        placeholder="e.g. 2024 MacBook Pro, Designer Bag, Jet Ski"
                         className="w-full rounded-xl border-2 border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm sm:text-base font-bold text-white placeholder-zinc-500 outline-none transition-all focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20"
                       />
                     </div>
@@ -1116,7 +1116,7 @@ export default function Home() {
                     >
                       <span className="flex items-center gap-1.5">
                         <Zap className="h-3.5 w-3.5 text-amber-400"/>
-                        <span>+ Add Price &amp; Why You Think You Need It (Optional)</span>
+                        <span>+ Add Price &amp; Justification for Dick to Savage First (Optional)</span>
                       </span>
                       {showViralOptions ? <ChevronUp className="h-4 w-4"/> : <ChevronDown className="h-4 w-4"/>}
                     </button>
@@ -1125,25 +1125,25 @@ export default function Home() {
                       <div className="mt-3 space-y-3 animate-in fade-in">
                         <div>
                           <label className="mb-1 block text-[11px] font-black uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                            <Building2 className="h-3.5 w-3.5 text-orange-400"/> Brand / Store / Retailer
+                            <DollarSign className="h-3.5 w-3.5 text-orange-400"/> Total Cost / Price
                           </label>
                           <input
                             type="text"
                             value={companyName}
                             onChange={(e) => setCompanyName(e.target.value)}
-                            placeholder="e.g. Apple, Amazon, Balenciaga, Best Buy"
+                            placeholder="e.g. $1,200 or $450/month"
                             className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-semibold text-white placeholder-zinc-600 outline-none focus:border-orange-500"
                           />
                         </div>
                         <div>
                           <label className="mb-1 block text-[11px] font-black uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                            <DollarSign className="h-3.5 w-3.5 text-amber-400"/> Estimated Cost &amp; Your Justification (Dick will shred it first)
+                            <Sparkles className="h-3.5 w-3.5 text-amber-400"/> Your Reason for Buying (Dick will roast it first)
                           </label>
                           <input
                             type="text"
                             value={linkedinBio}
                             onChange={(e) => setLinkedinBio(e.target.value)}
-                            placeholder='e.g. "$1,800. I work long hours and deserve to treat myself."'
+                            placeholder='e.g. "I deserve a treat after a hard week. It is an investment."'
                             className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-semibold text-white placeholder-zinc-600 outline-none focus:border-orange-500"
                           />
                         </div>
@@ -1218,13 +1218,13 @@ export default function Home() {
                         activeTab === 'companies' ? 'text-amber-400 border-b-2 border-amber-500' : 'text-zinc-500 hover:text-zinc-300'
                       )}
                     >
-                      <CreditCard className="h-3.5 w-3.5"/> 💳 Spending Wars
+                      <Wallet className="h-3.5 w-3.5"/> 💳 Category Wars
                     </button>
                   </div>
 
                   <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
                     {activeTab === 'companies' ? (
-                      SPENDING_WARS.map((item, idx) => (
+                      MARKET_WARS.map((item, idx) => (
                         <div key={idx} className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-3 flex flex-col gap-1 text-xs">
                           <div className="flex items-center justify-between text-zinc-400">
                             <span className="font-semibold text-zinc-200">{item.name} <span className="text-[10px] text-zinc-500">({item.players})</span></span>
@@ -1371,7 +1371,7 @@ export default function Home() {
                   const isLastMessage = index === messages.length - 1;
 
                   const userDisplayText = isUser && (text.includes('You are Dick Headerson') || text.startsWith('My name is'))
-                    ? `Hi Dick, I'm ${userName.trim()}${companyName ? ` (looking at ${companyName.trim()})` : ''} and I'm thinking of buying: ${jobTitle.trim()}. Give me the brutal truth.`
+                    ? `Hi Dick, I'm ${userName.trim()} and I'm ready to have my purchase of ${jobTitle.trim()} audited.`
                     : text;
 
                   if (!isUser && isInterviewOver && isLastMessage && !isStreaming && parsedScorecard) {
@@ -1380,7 +1380,7 @@ export default function Home() {
                         <div className="flex items-center justify-between w-full ml-1">
                           <div className="flex items-center gap-2">
                             <span style={{ fontFamily: "'Brush Script MT', 'Lucida Handwriting', cursive" }} className="text-xl sm:text-2xl text-orange-400">Dick Headerson</span>
-                            <span className="text-[10px] sm:text-xs text-zinc-500 mt-1">• Spending Audit</span>
+                            <span className="text-[10px] sm:text-xs text-zinc-500 mt-1">• Final Evaluation</span>
                           </div>
                         </div>
 
@@ -1396,7 +1396,7 @@ export default function Home() {
                               { title: 'The Autopsy', icon: '💀' },
                               { title: 'Translation', icon: '🗣️' },
                               { title: 'The Fix', icon: '💡' },
-                              { title: 'Badge / Story', icon: '🎖' },
+                              { title: 'Badge / Story', icon: '🎖️' },
                             ].map((step, idx) => (
                               <button
                                 key={idx}
@@ -1431,7 +1431,7 @@ export default function Home() {
                                   onClick={() => setScorecardStep(1)}
                                   className="flex items-center gap-1.5 rounded-xl bg-orange-500 px-4 py-2 text-xs sm:text-sm font-bold text-white hover:bg-orange-600 transition"
                                 >
-                                  Next: What Dick Heard <ChevronRight className="h-4 w-4"/>
+                                  Next: What Your Wallet Heard <ChevronRight className="h-4 w-4"/>
                                 </button>
                               </div>
                             </div>
@@ -1440,7 +1440,7 @@ export default function Home() {
                           {scorecardStep === 1 && (
                             <div className="mt-4 space-y-3 animate-in fade-in duration-300">
                               <h4 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                                <span>🗣️</span> Your Rationalization vs. The Cold Reality
+                                <span>🗣️</span> What You Thought It Said vs. What Your Wallet Heard
                               </h4>
                               <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3 sm:p-4 text-xs sm:text-sm text-zinc-300 leading-relaxed prose prose-invert prose-sm max-w-none break-words">
                                 <ReactMarkdown>{parsedScorecard.translation || 'No translation available.'}</ReactMarkdown>
@@ -1462,7 +1462,7 @@ export default function Home() {
                           {scorecardStep === 2 && (
                             <div className="mt-4 space-y-3 animate-in fade-in duration-300">
                               <h4 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                                <span>🚩</span> Red Flags &amp; <span>💡</span> The Budget Doctor
+                                <span>🚩</span> Red Flags &amp; <span>💡</span> The Wealth Doctor
                               </h4>
                               {parsedScorecard.redFlags && (
                                 <div className="rounded-xl border border-red-950/50 bg-red-950/20 p-3 sm:p-4 text-xs sm:text-sm text-zinc-300 prose prose-invert prose-sm max-w-none break-words">
@@ -1470,7 +1470,7 @@ export default function Home() {
                                 </div>
                               )}
                               <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3 sm:p-4 text-xs sm:text-sm text-zinc-300 prose prose-invert prose-sm max-w-none break-words">
-                                <ReactMarkdown>{parsedScorecard.scriptDoctor || 'Calculate true cost-per-use, enforce a mandatory 48-hour cooling period, and look for used/refurbished alternatives.'}</ReactMarkdown>
+                                <ReactMarkdown>{parsedScorecard.scriptDoctor || 'Focus on concrete ROI, actual utility, and zero retail therapy justifications.'}</ReactMarkdown>
                               </div>
                               <div className="pt-2 flex items-center justify-between">
                                 <button onClick={() => setScorecardStep(1)} className="text-xs sm:text-sm text-zinc-500 hover:text-zinc-300">
@@ -1502,7 +1502,7 @@ export default function Home() {
                                   className={cn("flex items-center gap-1 px-2.5 py-1.5 rounded-lg transition text-[11px]", badgeFormat === 'story' ? "bg-red-600 text-white" : "text-zinc-400 hover:text-white")}
                                 >
                                   <Smartphone className="h-3 w-3"/>
-                                  <span>9:16 Rejection</span>
+                                  <span>9:16 Pink Slip</span>
                                 </button>
                                 <button
                                   type="button"
@@ -1529,24 +1529,24 @@ export default function Home() {
                                     <div className="flex items-center justify-between border-b border-red-500/30 pb-2">
                                       <div className="flex items-center gap-1.5">
                                         <FileWarning className="h-4 w-4 text-red-500 animate-pulse"/>
-                                        <span className="text-[10px] font-black uppercase tracking-wider text-red-400">Financial Warning Citation</span>
+                                        <span className="text-[10px] font-black uppercase tracking-wider text-red-400">Financial Citation</span>
                                       </div>
                                       <span className="text-[9px] font-mono text-zinc-500">{new Date().toLocaleDateString()}</span>
                                     </div>
 
                                     <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                                       <div className="border-4 border-red-500/40 text-red-500/40 px-4 py-1 text-3xl sm:text-4xl font-black uppercase tracking-widest -rotate-24 select-none rounded-xl">
-                                        PURCHASE DENIED
+                                        REJECTED
                                       </div>
                                     </div>
 
                                     <div className="relative z-10 text-center my-auto">
-                                      <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Notice of Financial Sanity Check</p>
+                                      <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Notice of Financial Delusion</p>
                                       <h3 className="text-xl font-black text-white mt-0.5">{userName}</h3>
                                       <p className="text-xs text-red-400 font-semibold">{jobTitle} {companyName ? `• ${companyName}` : ''}</p>
 
                                       <div className="mt-4 rounded-xl border border-red-500/30 bg-red-950/40 p-3 text-center">
-                                        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Discipline Score</p>
+                                        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Score &amp; Verdict</p>
                                         <p className="text-4xl font-black text-red-400 leading-tight mt-0.5">{parsedScorecard.finalScore}</p>
                                         <p className="text-[10px] font-black uppercase tracking-wider text-red-300 mt-1">
                                           {parsedScorecard.decision}
@@ -1556,14 +1556,14 @@ export default function Home() {
                                       <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-900/80 p-2 text-left">
                                         <p className="text-[8px] font-bold uppercase text-zinc-500">Dick&apos;s Autopsy Note:</p>
                                         <p className="text-[10.5px] italic text-zinc-300 mt-0.5 line-clamp-3">
-                                          &quot;{parsedScorecard.introRoast || 'Shopper surrendered cold financial logic in favor of marketing clichés.'}&quot;
+                                          &quot;{parsedScorecard.introRoast || 'User deployed toxic spending clichés and financial delusions.'}&quot;
                                         </p>
                                       </div>
                                     </div>
 
                                     <div className="relative z-10 border-t border-zinc-800 pt-2 flex items-center justify-between text-[9px] text-zinc-500">
                                       <span>roastmypurchase.me</span>
-                                      <span className="font-mono text-red-400 font-bold">AUDIT CITATION #RMPU-{Math.floor(Math.random() * 90000 + 10000)}</span>
+                                      <span className="font-mono text-red-400 font-bold">AUDIT CITATION #RMPUR-{Math.floor(Math.random() * 90000 + 10000)}</span>
                                     </div>
                                   </>
                                 )}
@@ -1571,22 +1571,22 @@ export default function Home() {
                                 {badgeFormat === 'receipts' && (
                                   <>
                                     <div className="flex items-center justify-between border-b border-zinc-800 pb-1.5">
-                                      <span className="text-[10px] font-black uppercase tracking-wider text-amber-400">The Spending Receipts</span>
+                                      <span className="text-[10px] font-black uppercase tracking-wider text-amber-400">The Purchase Receipts</span>
                                       <span className="text-[10px] font-black text-orange-400">Score: {parsedScorecard.finalScore}</span>
                                     </div>
 
                                     <div className="my-auto space-y-2">
                                       <div className="rounded-lg border border-zinc-800 bg-zinc-900/80 p-2.5 text-xs">
-                                        <p className="text-[9px] font-bold uppercase text-zinc-400">What You Told Yourself:</p>
+                                        <p className="text-[9px] font-bold uppercase text-zinc-400">What You Thought You Said:</p>
                                         <p className="text-xs text-white font-medium mt-0.5 line-clamp-2">
-                                          {userName} on buying {jobTitle}: &quot;I work hard, it's an investment, I deserve this.&quot;
+                                          {userName} on {jobTitle}: &quot;I deserve this, it's practically an investment, and I'll use it every day.&quot;
                                         </p>
                                       </div>
 
                                       <div className="rounded-lg border border-orange-500/30 bg-orange-950/30 p-2.5 text-xs">
-                                        <p className="text-[9px] font-bold uppercase text-orange-400">The Cold Reality:</p>
+                                        <p className="text-[9px] font-bold uppercase text-orange-400">What Your Wallet Heard:</p>
                                         <p className="text-xs text-zinc-200 italic mt-0.5 line-clamp-3">
-                                          &quot;{parsedScorecard.translation ? parsedScorecard.translation.slice(0, 140) + '...' : 'An emotional impulse buy destined for storage shelves while bills pile up.'}&quot;
+                                          &quot;{parsedScorecard.translation ? parsedScorecard.translation.slice(0, 140) + '...' : 'An impulsive status-buy driven by consumerism that will sit in a closet collecting dust.'}&quot;
                                         </p>
                                       </div>
                                     </div>
@@ -1612,12 +1612,12 @@ export default function Home() {
 
                                     <div className="mt-3.5 flex items-start justify-between gap-2">
                                       <div>
-                                        <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Prospective Purchase</p>
+                                        <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Purchase Intent</p>
                                         <h4 className="text-base font-extrabold text-white leading-tight">{userName}</h4>
                                         <p className="text-xs text-orange-400/90 font-medium">{jobTitle} {companyName ? `• ${companyName}` : ''}</p>
                                       </div>
                                       <div className="text-right">
-                                        <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Discipline Score</p>
+                                        <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Final Score</p>
                                         <p className="text-xl font-black text-orange-500 leading-tight">
                                           {parsedScorecard.finalScore}
                                         </p>
@@ -1789,10 +1789,10 @@ export default function Home() {
                     </div>
                     <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md bg-zinc-800 px-3.5 py-3">
                       <span className="h-2 w-2 animate-bounce rounded-full bg-orange-500 [animation-delay:-0.3s]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-orange-500 [animation-delay:-### File 3 of 3: Main Purchase Roast Application (`app/page.tsx`)
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-orange-500 [animation-delay:-0.### File 3 of 3: Main Purchase Roast Application (`app/page.tsx`)
 
-**Purpose:** Powers the full interactive frontend for `RoastMyPurchase.me`—including Dick Headerson's impulse-buy reality checker, sound synthesis, impulse buyer cliché triggers ("it's an investment", "girl math", "treat yourself"), multi-question gauntlet flows, and downloadable buyer-remorse scorecard badges.
+**Purpose:** Powers the complete interactive frontend for `RoastMyPurchase.me`—including Dick Headerson's financial reality check AI, audio voice generation, spending cliché buzzers ("treat myself"), head-to-head scorecards, and the shareable citation badges.
 
-1. In your **`roastmypurchase`** repository on GitHub, open:
+1. In your **`roastmypurchase`** repository on GitHub, navigate to:
 ```text
 app/page.tsx
